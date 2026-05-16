@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alma Estética – Lamarque</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════ NAVBAR ═══════════════════════════ -->
+  <header class="navbar">
+    <div class="navbar__inner">
+      <a href="#inicio" class="navbar__brand">Alma Estética</a>
+      <nav class="navbar__links">
+        <a href="#nosotros">Nosotros</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#galeria">Galería</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <a
+        href="https://www.instagram.com/esteticalamarque"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn--nav-ig"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+        @esteticalamarque
+      </a>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+  <section class="hero" id="inicio" style="background-image: url('imagenes/09_images.jpeg');">
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <span class="hero__eyebrow">Bienvenida a</span>
+      <h1 class="hero__title">
+        Alma<br>
+        <em>Estética</em>
+      </h1>
+      <div class="hero__divider"></div>
+      <p class="hero__sub">Tu espacio de bienestar y belleza en Lamarque</p>
+      <div class="hero__actions">
+        <a href="#servicios" class="btn btn--outline-white">Ver servicios</a>
+        <a
+          href="https://www.instagram.com/esteticalamarque"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn--champagne"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+          Seguinos
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ NOSOTROS ═══════════════════════════ -->
+  <section class="nosotros section" id="nosotros">
+    <div class="container nosotros__grid">
+      <div class="nosotros__images">
+        <img src="imagenes/08_images.jpeg" alt="Interior de Alma Estética" class="nosotros__img nosotros__img--main" />
+        <img src="imagenes/07_images.jpeg" alt="Sala de tratamientos" class="nosotros__img nosotros__img--secondary" />
+      </div>
+      <div class="nosotros__text">
+        <span class="section__eyebrow">Quiénes somos</span>
+        <h2 class="section__title">Un espacio pensado<br><em>para vos</em></h2>
+        <p>En <strong>Alma Estética</strong> creemos que cuidarse es un acto de amor propio. Nuestro centro está diseñado para que cada visita sea una experiencia de bienestar integral, combinando técnicas modernas con un trato personalizado y cálido.</p>
+        <p>Contamos con tecnología de aparatología estética de última generación y productos de primera calidad, adaptando cada tratamiento a las necesidades únicas de tu piel.</p>
+        <a href="#servicios" class="btn btn--outline">Conocer servicios</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ SERVICIOS FACIALES ═══════════════════════════ -->
+  <section class="section section--cream" id="servicios">
+    <div class="container">
+      <div class="section__header--center">
+        <div class="ornament"><span class="ornament__dot"></span></div>
+        <span class="section__eyebrow">Tratamientos faciales</span>
+        <h2 class="section__title">Nuestros Servicios</h2>
+        <p class="section__body">Cada tratamiento es diseñado de forma personalizada para las necesidades únicas de tu piel, con productos y tecnología de primera calidad.</p>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <div class="card__num">01</div>
+          <h3 class="card__title">Limpieza Facial Profunda</h3>
+          <p class="card__text">Con activos seleccionados según la necesidad de tu piel. Incluye extracción, hidratación y cabina LED.</p>
+        </div>
+        <div class="card">
+          <div class="card__num">02</div>
+          <h3 class="card__title">Tratamientos Despigmentantes</h3>
+          <p class="card__text">Reducción de manchas y unificación del tono de piel con protocolos personalizados de alta eficacia.</p>
+        </div>
+        <div class="card">
+          <div class="card__num">03</div>
+          <h3 class="card__title">Limpieza Facial Premium</h3>
+          <p class="card__text">Con aparatología estética: radiofrecuencia, terapia LED, espátula ultrasónica y punta de diamante.</p>
+        </div>
+        <div class="card">
+          <div class="card__num">04</div>
+          <h3 class="card__title">Radiofrecuencia Facial</h3>
+          <p class="card__text">Estimula el colágeno y la elastina. Reafirma, tensa y redefine el óvalo facial sin tiempo de recuperación.</p>
+        </div>
+        <div class="card">
+          <div class="card__num">05</div>
+          <h3 class="card__title">Microneedling Facial</h3>
+          <p class="card__text">Con exosomas e hidralips para máxima regeneración cutánea e hidratación profunda de labios.</p>
+        </div>
+        <div class="card">
+          <div class="card__num">06</div>
+          <h3 class="card__title">Facial para Adolescentes</h3>
+          <p class="card__text">Limpieza e hidratación especialmente diseñada para pieles jóvenes. Tratamiento adaptado y seguro.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ CORPORALES ═══════════════════════════ -->
+  <section class="section" id="corporales">
+    <div class="container">
+      <div class="section__header--center">
+        <div class="ornament"><span class="ornament__dot"></span></div>
+        <span class="section__eyebrow">Cuerpo</span>
+        <h2 class="section__title">Tratamientos Corporales</h2>
+      </div>
+
+      <div class="corporales__list">
+        <div class="corporales__item">
+          <div class="corporales__num">Tratamiento 01</div>
+          <div class="corporales__info">
+            <h3>Piernas Cansadas</h3>
+            <p>Para celulitis y edema, con aparatología y productos especializados. Duración aproximada: 1 hora 30 minutos.</p>
+          </div>
+        </div>
+        <div class="corporales__item">
+          <div class="corporales__num">Tratamiento 02</div>
+          <div class="corporales__info">
+            <h3>Otros Corporales</h3>
+            <p>Consultanos por opciones adicionales de tratamientos corporales. Las sesiones se realizan a partir del horario de tarde.</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="corporales__nota">* Las limpiezas y tratamientos corporales se realizan de tarde · Consultá disponibilidad</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ GALERÍA ═══════════════════════════ -->
+  <section class="section section--dark" id="galeria" style="padding-block: 0; overflow: hidden;">
+    <div class="container" style="max-width: 100%; padding: 0;">
+      <div style="text-align:center; padding: 5rem 2rem 3.5rem;">
+        <div class="ornament" style="--ornament-color: var(--color-champagne)"><span class="ornament__dot"></span></div>
+        <span class="section__eyebrow">Nuestro espacio</span>
+        <h2 class="section__title" style="color: var(--color-off-white);">Galería</h2>
+      </div>
+      <div class="galeria__grid">
+        <img src="imagenes/06_images.jpeg" alt="Fachada de Alma Estética" class="galeria__img" />
+        <img src="imagenes/09_images.jpeg" alt="Sala de espera" class="galeria__img" />
+        <img src="imagenes/08_images.jpeg" alt="Decoración interior" class="galeria__img" />
+        <img src="imagenes/07_images.jpeg" alt="Sala de tratamientos" class="galeria__img" />
+        <img src="imagenes/10_images.jpeg" alt="Equipamiento" class="galeria__img" />
+        <img src="imagenes/05_images.jpeg" alt="Resultado de tratamiento" class="galeria__img" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ CTA INSTAGRAM ═══════════════════════════ -->
+  <section class="cta-instagram">
+    <div class="container">
+      <div class="ornament"><span class="ornament__dot"></span></div>
+      <span class="cta-instagram__eyebrow">Seguinos</span>
+      <h2>La belleza es un arte,<br><em style="font-style:italic; font-family: var(--font-serif);">nosotras lo hacemos posible</em></h2>
+      <p>Visitá nuestro Instagram para ver los últimos trabajos, novedades y reservar tu turno de manera fácil y rápida.</p>
+      <a
+        href="https://www.instagram.com/esteticalamarque"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn--champagne"
+        style="padding: 1.1rem 3rem; font-size: 0.75rem;"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+        @esteticalamarque
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ CONTACTO ═══════════════════════════ -->
+  <section class="section" id="contacto">
+    <div class="container contacto__grid">
+      <div>
+        <span class="section__eyebrow">Encontranos</span>
+        <h2 class="section__title">Contacto</h2>
+
+        <div class="contacto__item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          <div>
+            <span class="contacto__item-label">Dirección</span>
+            <span class="contacto__item-value">Arrieta 245, Lamarque, Río Negro</span>
+          </div>
+        </div>
+
+        <div class="contacto__item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+          <div>
+            <span class="contacto__item-label">Instagram</span>
+            <a href="https://www.instagram.com/esteticalamarque" target="_blank" rel="noopener noreferrer" class="contacto__item-value">@esteticalamarque</a>
+          </div>
+        </div>
+
+        <div class="contacto__item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <div>
+            <span class="contacto__item-label">Horario</span>
+            <span class="contacto__item-value">Turnos de mañana y tarde · Consultá disponibilidad</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contacto__cta-box">
+        <span class="section__eyebrow">Reservá tu turno</span>
+        <h3>¿Lista para comenzar<br>tu experiencia?</h3>
+        <p>Escribinos por Instagram y coordinamos el horario que mejor te quede.</p>
+        <a
+          href="https://www.instagram.com/esteticalamarque"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn--primary"
+        >
+          Reservar turno
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span class="footer__brand">Alma Estética</span>
+      <p class="footer__copy">© 2025 Alma Estética · Arrieta 245, Lamarque · Todos los derechos reservados</p>
+      <a
+        href="https://www.instagram.com/esteticalamarque"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="footer__ig"
+        aria-label="Instagram Alma Estética"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+      </a>
+    </div>
+  </footer>
+
+</body>
+</html>
