@@ -667,6 +667,8 @@
       e.preventDefault();
       const nombre   = document.getElementById('nombre').value.trim();
       const contacto = document.getElementById('contacto').value.trim();
+      const servicio = document.getElementById('servicio').value;
+      const notas    = document.getElementById('notas').value.trim();
 
       if (!nombre || !contacto) {
         alert('Por favor completá tu nombre y datos de contacto.');
@@ -677,10 +679,20 @@
         return;
       }
 
-      const dayOfW    = selDate.getDay();
-      const fechaStr  = `${DAY_NAMES[dayOfW].charAt(0).toUpperCase() + DAY_NAMES[dayOfW].slice(1)} ${selDate.getDate()}/${selDate.getMonth()+1}/${selDate.getFullYear()} a las ${selTime} hs`;
-      document.getElementById('success-detail').textContent = fechaStr;
+      const dayOfW   = selDate.getDay();
+      const fechaStr = `${DAY_NAMES[dayOfW].charAt(0).toUpperCase() + DAY_NAMES[dayOfW].slice(1)} ${selDate.getDate()}/${selDate.getMonth()+1}/${selDate.getFullYear()} a las ${selTime} hs`;
 
+      const mensaje = `Hola! Quiero reservar un turno en Alma Estética.\n\n` +
+        `📅 Día: ${DAY_NAMES[dayOfW].charAt(0).toUpperCase() + DAY_NAMES[dayOfW].slice(1)} ${selDate.getDate()}/${selDate.getMonth()+1}/${selDate.getFullYear()}\n` +
+        `🕐 Horario: ${selTime} hs\n` +
+        `💆 Servicio: ${servicio || 'A confirmar'}\n` +
+        `👤 Nombre: ${nombre}\n` +
+        `📱 Contacto: ${contacto}\n` +
+        `📝 Notas: ${notas || '—'}`;
+
+      window.open(`https://wa.me/5492984315617?text=${encodeURIComponent(mensaje)}`, '_blank');
+
+      document.getElementById('success-detail').textContent = fechaStr;
       this.style.display = 'none';
       document.querySelector('.booking-form__subtitle').style.display = 'none';
       document.querySelector('.form-summary').style.display = 'none';
