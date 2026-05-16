@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reservar turno – Alma Estética</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Página de turnos ─────────────────────────────── */
+    .turnos-hero {
+      padding-top: 100px;
+      padding-bottom: 3rem;
+      text-align: center;
+      background: var(--color-cream);
+      border-bottom: 1px solid var(--color-light);
+    }
+
+    .turnos-hero__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-medium);
+      margin-bottom: 2rem;
+      transition: color var(--transition);
+    }
+    .turnos-hero__back:hover { color: var(--color-burgundy); }
+
+    .turnos-body {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 4rem;
+      align-items: start;
+      padding-block: 4rem;
+    }
+
+    /* ── Calendario ─────────────────────────────────── */
+    .cal {
+      background: var(--color-white);
+      border: 1px solid var(--color-light);
+    }
+
+    .cal__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--color-light);
+    }
+
+    .cal__month {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--color-dark);
+      text-transform: capitalize;
+    }
+
+    .cal__nav {
+      background: none;
+      border: 1px solid var(--color-light);
+      width: 34px;
+      height: 34px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-medium);
+      transition: var(--transition);
+      font-size: 1rem;
+    }
+    .cal__nav:hover:not(:disabled) {
+      border-color: var(--color-champagne);
+      color: var(--color-champagne);
+    }
+    .cal__nav:disabled { opacity: 0.3; cursor: default; }
+
+    .cal__weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      padding: 0.75rem 1rem 0.25rem;
+    }
+
+    .cal__weekday {
+      text-align: center;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-champagne);
+      padding: 0.25rem 0;
+    }
+
+    .cal__days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+      padding: 0.5rem 1rem 1.25rem;
+    }
+
+    .cal__day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.88rem;
+      font-weight: 300;
+      border-radius: 2px;
+      cursor: default;
+      color: var(--color-light);
+      transition: var(--transition);
+    }
+
+    .cal__day--available {
+      color: var(--color-dark);
+      cursor: pointer;
+    }
+    .cal__day--available:hover {
+      background: var(--color-cream);
+      color: var(--color-burgundy);
+    }
+
+    .cal__day--today {
+      font-weight: 500;
+      color: var(--color-burgundy);
+    }
+
+    .cal__day--selected {
+      background: var(--color-burgundy) !important;
+      color: var(--color-white) !important;
+    }
+
+    .cal__day--past { opacity: 0.3; }
+
+    /* ── Slots de horario ──────────────────────────── */
+    .slots {
+      margin-top: 2rem;
+    }
+
+    .slots__label {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-champagne);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .slots__selected-date {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--color-dark);
+      margin-bottom: 1.25rem;
+      font-weight: 400;
+    }
+
+    .slots__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.6rem;
+    }
+
+    .slot-btn {
+      padding: 0.65rem 0.25rem;
+      text-align: center;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--color-dark);
+      background: var(--color-white);
+      border: 1px solid var(--color-light);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .slot-btn:hover {
+      border-color: var(--color-champagne);
+      color: var(--color-champagne);
+    }
+    .slot-btn.is-selected {
+      background: var(--color-burgundy);
+      border-color: var(--color-burgundy);
+      color: var(--color-white);
+    }
+
+    .slots__placeholder {
+      font-size: 0.9rem;
+      color: var(--color-light);
+      font-style: italic;
+    }
+
+    /* ── Formulario ────────────────────────────────── */
+    .booking-form {
+      background: var(--color-cream);
+      padding: 2.5rem;
+      border: 1px solid var(--color-light);
+      position: sticky;
+      top: 100px;
+    }
+
+    .booking-form__title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--color-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .booking-form__subtitle {
+      font-size: 0.85rem;
+      color: var(--color-medium);
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--color-light);
+    }
+
+    .form-summary {
+      background: var(--color-white);
+      border: 1px solid var(--color-light);
+      padding: 1rem 1.25rem;
+      margin-bottom: 2rem;
+      font-size: 0.88rem;
+    }
+
+    .form-summary__row {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.35rem 0;
+      color: var(--color-medium);
+    }
+    .form-summary__row:not(:last-child) {
+      border-bottom: 1px solid var(--color-light);
+    }
+    .form-summary__val {
+      font-weight: 500;
+      color: var(--color-dark);
+      text-align: right;
+    }
+    .form-summary__placeholder {
+      color: var(--color-light);
+      font-style: italic;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-champagne);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--color-dark);
+      background: var(--color-white);
+      border: 1px solid var(--color-light);
+      outline: none;
+      transition: border-color var(--transition);
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--color-champagne);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 80px; }
+
+    .booking-form .btn--primary {
+      width: 100%;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+
+    .form-note {
+      font-size: 0.75rem;
+      color: var(--color-medium);
+      text-align: center;
+      margin-top: 1rem;
+      line-height: 1.6;
+    }
+
+    /* ── Pantalla de éxito ─────────────────────────── */
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    .success-screen.is-visible { display: block; }
+
+    .success-screen__icon {
+      width: 56px;
+      height: 56px;
+      border: 1.5px solid var(--color-champagne);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      color: var(--color-champagne);
+      font-size: 1.4rem;
+    }
+
+    .success-screen h3 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--color-dark);
+      margin-bottom: 0.75rem;
+    }
+
+    .success-screen p {
+      font-size: 0.9rem;
+      color: var(--color-medium);
+      line-height: 1.8;
+      margin-bottom: 0.5rem;
+    }
+
+    .success-screen .btn {
+      margin-top: 1.5rem;
+    }
+
+    /* ── Horarios info ─────────────────────────────── */
+    .schedule-info {
+      margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--color-light);
+    }
+
+    .schedule-info__title {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-champagne);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .schedule-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--color-light);
+      color: var(--color-medium);
+    }
+    .schedule-row:last-child { border-bottom: none; }
+    .schedule-row strong { color: var(--color-dark); font-weight: 400; }
+
+    /* ── Responsive ────────────────────────────────── */
+    @media (max-width: 860px) {
+      .turnos-body {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .booking-form { position: static; }
+      .slots__grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 480px) {
+      .slots__grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAVBAR ─────────────────────────────────────── -->
+  <header class="navbar">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__brand">Alma Estética</a>
+      <nav class="navbar__links">
+        <a href="index.html#nosotros">Nosotros</a>
+        <a href="index.html#servicios">Servicios</a>
+        <a href="index.html#galeria">Galería</a>
+        <a href="index.html#contacto">Contacto</a>
+      </nav>
+      <a href="https://www.instagram.com/esteticalamarque" target="_blank" rel="noopener noreferrer" class="btn--nav-ig">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        @esteticalamarque
+      </a>
+    </div>
+  </header>
+
+  <!-- ─── HERO ───────────────────────────────────────── -->
+  <div class="turnos-hero">
+    <div class="container">
+      <a href="index.html" class="turnos-hero__back">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Volver al inicio
+      </a>
+      <div class="ornament"><span class="ornament__dot"></span></div>
+      <span class="section__eyebrow">Agenda tu visita</span>
+      <h1 class="section__title" style="margin-bottom:0.5rem">Reservá tu turno</h1>
+      <p style="font-size:0.95rem; color:var(--color-medium); max-width:480px; margin-inline:auto;">
+        Seleccioná el día y horario que más te convenga. Te confirmaremos la reserva a la brevedad.
+      </p>
+    </div>
+  </div>
+
+  <!-- ─── CUERPO ─────────────────────────────────────── -->
+  <div class="container turnos-body">
+
+    <!-- Calendario + slots -->
+    <div>
+      <!-- Calendario -->
+      <div class="cal">
+        <div class="cal__header">
+          <button class="cal__nav" id="prev-month" aria-label="Mes anterior">&#8592;</button>
+          <span class="cal__month" id="cal-month-label"></span>
+          <button class="cal__nav" id="next-month" aria-label="Mes siguiente">&#8594;</button>
+        </div>
+        <div class="cal__weekdays">
+          <span class="cal__weekday">Dom</span>
+          <span class="cal__weekday">Lun</span>
+          <span class="cal__weekday">Mar</span>
+          <span class="cal__weekday">Mié</span>
+          <span class="cal__weekday">Jue</span>
+          <span class="cal__weekday">Vie</span>
+          <span class="cal__weekday">Sáb</span>
+        </div>
+        <div class="cal__days" id="cal-days"></div>
+      </div>
+
+      <!-- Horarios disponibles -->
+      <div class="slots" id="slots-section">
+        <span class="slots__label">Horarios disponibles</span>
+        <div id="slots-content">
+          <p class="slots__placeholder">Seleccioná un día del calendario para ver los horarios.</p>
+        </div>
+      </div>
+
+      <!-- Tabla de horarios de atención -->
+      <div class="schedule-info">
+        <span class="schedule-info__title">Horarios de atención</span>
+        <div class="schedule-row"><strong>Lunes, Miércoles y Viernes</strong><span>15:00 – 18:00 hs</span></div>
+        <div class="schedule-row"><strong>Martes y Jueves</strong><span>15:00 – 20:00 hs</span></div>
+        <div class="schedule-row"><strong>Sábado y Domingo</strong><span>Cerrado</span></div>
+      </div>
+    </div>
+
+    <!-- Formulario -->
+    <aside>
+      <div class="booking-form" id="booking-form-wrap">
+        <h2 class="booking-form__title">Tu reserva</h2>
+        <p class="booking-form__subtitle">Completá tus datos y te confirmamos el turno.</p>
+
+        <!-- Resumen de selección -->
+        <div class="form-summary">
+          <div class="form-summary__row">
+            <span>Día</span>
+            <span class="form-summary__val" id="summary-date"><span class="form-summary__placeholder">—</span></span>
+          </div>
+          <div class="form-summary__row">
+            <span>Horario</span>
+            <span class="form-summary__val" id="summary-time"><span class="form-summary__placeholder">—</span></span>
+          </div>
+          <div class="form-summary__row">
+            <span>Duración</span>
+            <span class="form-summary__val">45 minutos</span>
+          </div>
+        </div>
+
+        <!-- Formulario -->
+        <form id="booking-form" novalidate>
+          <div class="form-group">
+            <label for="nombre">Nombre completo *</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+          </div>
+          <div class="form-group">
+            <label for="contacto">Teléfono o Instagram *</label>
+            <input type="text" id="contacto" name="contacto" placeholder="Ej: 2983123456 o @usuario" required />
+          </div>
+          <div class="form-group">
+            <label for="servicio">Servicio de interés</label>
+            <select id="servicio" name="servicio">
+              <option value="">Seleccioná un servicio (opcional)</option>
+              <option>Limpieza facial profunda</option>
+              <option>Limpieza facial premium</option>
+              <option>Tratamiento despigmentante</option>
+              <option>Radiofrecuencia facial</option>
+              <option>Microneedling facial</option>
+              <option>Facial para adolescentes</option>
+              <option>Tratamiento piernas cansadas</option>
+              <option>Otro / consultar</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="notas">Notas adicionales</label>
+            <textarea id="notas" name="notas" placeholder="¿Alguna consulta o comentario?"></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary">Solicitar turno</button>
+          <p class="form-note">
+            Te contactaremos para confirmar la disponibilidad dentro de las próximas 24 hs hábiles.
+          </p>
+        </form>
+
+        <!-- Pantalla de éxito -->
+        <div class="success-screen" id="success-screen">
+          <div class="success-screen__icon">✓</div>
+          <h3>¡Solicitud enviada!</h3>
+          <p>Recibimos tu pedido de turno para:</p>
+          <p><strong id="success-detail"></strong></p>
+          <p>Nos comunicaremos con vos a la brevedad para confirmar la disponibilidad.</p>
+          <a href="index.html" class="btn btn--outline">Volver al inicio</a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <script>
+    // ── Configuración de horarios ────────────────────────
+    const SLOTS = {
+      1: ['15:00', '16:00', '17:00'],                       // Lunes
+      2: ['15:00', '16:00', '17:00', '18:00', '19:00'],    // Martes
+      3: ['15:00', '16:00', '17:00'],                       // Miércoles
+      4: ['15:00', '16:00', '17:00', '18:00', '19:00'],    // Jueves
+      5: ['15:00', '16:00', '17:00'],                       // Viernes
+    };
+
+    const MONTH_NAMES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+                         'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    const DAY_NAMES   = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+
+    // ── Estado ────────────────────────────────────────────
+    const today      = new Date(); today.setHours(0,0,0,0);
+    const maxDate    = new Date(today); maxDate.setMonth(maxDate.getMonth() + 2);
+    let   viewYear   = today.getFullYear();
+    let   viewMonth  = today.getMonth();
+    let   selDate    = null;
+    let   selTime    = null;
+
+    // ── Render del calendario ─────────────────────────────
+    function renderCalendar() {
+      document.getElementById('cal-month-label').textContent =
+        `${MONTH_NAMES[viewMonth]} ${viewYear}`;
+
+      document.getElementById('prev-month').disabled =
+        (viewYear === today.getFullYear() && viewMonth === today.getMonth());
+      document.getElementById('next-month').disabled =
+        (viewYear === maxDate.getFullYear() && viewMonth === maxDate.getMonth());
+
+      const firstDay = new Date(viewYear, viewMonth, 1).getDay();
+      const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+      const grid = document.getElementById('cal-days');
+      grid.innerHTML = '';
+
+      // Espacios vacíos antes del primer día
+      for (let i = 0; i < firstDay; i++) {
+        grid.appendChild(Object.assign(document.createElement('span'), { className: 'cal__day' }));
+      }
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const date    = new Date(viewYear, viewMonth, d);
+        const dayOfW  = date.getDay();
+        const isPast  = date < today;
+        const isAvail = SLOTS[dayOfW] && !isPast;
+        const isToday = date.getTime() === today.getTime();
+        const isSel   = selDate && date.getTime() === selDate.getTime();
+
+        const el = document.createElement('button');
+        el.type = 'button';
+        el.textContent = d;
+        el.className = 'cal__day'
+          + (isAvail  ? ' cal__day--available' : '')
+          + (isPast   ? ' cal__day--past'      : '')
+          + (isToday  ? ' cal__day--today'     : '')
+          + (isSel    ? ' cal__day--selected'  : '');
+
+        if (isAvail) {
+          el.addEventListener('click', () => selectDate(date));
+        } else {
+          el.disabled = true;
+        }
+        grid.appendChild(el);
+      }
+    }
+
+    // ── Selección de fecha ────────────────────────────────
+    function selectDate(date) {
+      selDate = date; selTime = null;
+      renderCalendar();
+      renderSlots();
+      updateSummary();
+    }
+
+    // ── Render de slots ───────────────────────────────────
+    function renderSlots() {
+      const container = document.getElementById('slots-content');
+      if (!selDate) {
+        container.innerHTML = '<p class="slots__placeholder">Seleccioná un día del calendario para ver los horarios.</p>';
+        return;
+      }
+      const dayOfW = selDate.getDay();
+      const slots  = SLOTS[dayOfW] || [];
+      const label  = `${DAY_NAMES[dayOfW].charAt(0).toUpperCase() + DAY_NAMES[dayOfW].slice(1)} ${selDate.getDate()} de ${MONTH_NAMES[selDate.getMonth()]}`;
+
+      container.innerHTML = `
+        <p class="slots__selected-date">${label}</p>
+        <div class="slots__grid">
+          ${slots.map(t => `
+            <button type="button" class="slot-btn${selTime === t ? ' is-selected' : ''}" data-time="${t}">
+              ${t} hs
+            </button>
+          `).join('')}
+        </div>
+      `;
+
+      container.querySelectorAll('.slot-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          selTime = btn.dataset.time;
+          container.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('is-selected'));
+          btn.classList.add('is-selected');
+          updateSummary();
+        });
+      });
+    }
+
+    // ── Actualizar resumen del formulario ─────────────────
+    function updateSummary() {
+      const dateEl = document.getElementById('summary-date');
+      const timeEl = document.getElementById('summary-time');
+
+      if (selDate) {
+        const dayOfW = selDate.getDay();
+        dateEl.textContent = `${DAY_NAMES[dayOfW].charAt(0).toUpperCase() + DAY_NAMES[dayOfW].slice(1)} ${selDate.getDate()}/${selDate.getMonth()+1}/${selDate.getFullYear()}`;
+      } else {
+        dateEl.innerHTML = '<span class="form-summary__placeholder">—</span>';
+      }
+
+      timeEl.textContent = selTime ? `${selTime} hs` : '';
+      if (!selTime) timeEl.innerHTML = '<span class="form-summary__placeholder">—</span>';
+    }
+
+    // ── Navegación del calendario ─────────────────────────
+    document.getElementById('prev-month').addEventListener('click', () => {
+      viewMonth--; if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+      renderCalendar();
+    });
+    document.getElementById('next-month').addEventListener('click', () => {
+      viewMonth++; if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+      renderCalendar();
+    });
+
+    // ── Envío del formulario ──────────────────────────────
+    document.getElementById('booking-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nombre   = document.getElementById('nombre').value.trim();
+      const contacto = document.getElementById('contacto').value.trim();
+
+      if (!nombre || !contacto) {
+        alert('Por favor completá tu nombre y datos de contacto.');
+        return;
+      }
+      if (!selDate || !selTime) {
+        alert('Por favor seleccioná un día y horario antes de confirmar.');
+        return;
+      }
+
+      const dayOfW    = selDate.getDay();
+      const fechaStr  = `${DAY_NAMES[dayOfW].charAt(0).toUpperCase() + DAY_NAMES[dayOfW].slice(1)} ${selDate.getDate()}/${selDate.getMonth()+1}/${selDate.getFullYear()} a las ${selTime} hs`;
+      document.getElementById('success-detail').textContent = fechaStr;
+
+      this.style.display = 'none';
+      document.querySelector('.booking-form__subtitle').style.display = 'none';
+      document.querySelector('.form-summary').style.display = 'none';
+      document.querySelector('.booking-form__title').style.display = 'none';
+      document.getElementById('success-screen').classList.add('is-visible');
+    });
+
+    // ── Init ──────────────────────────────────────────────
+    renderCalendar();
+    renderSlots();
+  </script>
+
+</body>
+</html>
