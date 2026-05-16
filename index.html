@@ -163,13 +163,22 @@
         <span class="section__eyebrow">Nuestro espacio</span>
         <h2 class="section__title" style="color: var(--color-off-white);">Galería</h2>
       </div>
-      <div class="galeria__grid">
-        <img src="imagenes/06_images.jpeg" alt="Fachada de Alma Estética" class="galeria__img" />
-        <img src="imagenes/09_images.jpeg" alt="Sala de espera" class="galeria__img" />
-        <img src="imagenes/08_images.jpeg" alt="Decoración interior" class="galeria__img" />
-        <img src="imagenes/07_images.jpeg" alt="Sala de tratamientos" class="galeria__img" />
-        <img src="imagenes/10_images.jpeg" alt="Equipamiento" class="galeria__img" />
-        <img src="imagenes/05_images.jpeg" alt="Resultado de tratamiento" class="galeria__img" />
+      <div class="galeria-carousel" id="galeria-carousel">
+        <div class="galeria-carousel__track" id="galeria-track">
+          <div class="galeria-carousel__slide"><img src="imagenes/06_images.jpeg" alt="Fachada de Alma Estética" /></div>
+          <div class="galeria-carousel__slide"><img src="imagenes/09_images.jpeg" alt="Sala de espera" /></div>
+          <div class="galeria-carousel__slide"><img src="imagenes/08_images.jpeg" alt="Decoración interior" /></div>
+          <div class="galeria-carousel__slide"><img src="imagenes/07_images.jpeg" alt="Sala de tratamientos" /></div>
+          <div class="galeria-carousel__slide"><img src="imagenes/10_images.jpeg" alt="Equipamiento" /></div>
+          <div class="galeria-carousel__slide"><img src="imagenes/05_images.jpeg" alt="Resultado de tratamiento" /></div>
+        </div>
+        <button class="galeria-carousel__btn galeria-carousel__btn--prev" id="galeria-prev" aria-label="Anterior">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="galeria-carousel__btn galeria-carousel__btn--next" id="galeria-next" aria-label="Siguiente">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+        <div class="galeria-carousel__dots" id="galeria-dots"></div>
       </div>
     </div>
   </section>
@@ -296,7 +305,7 @@
           </svg>
           <div>
             <span class="contacto__item-label">Dirección</span>
-            <span class="contacto__item-value">Arrieta 245, Lamarque, Río Negro</span>
+            <a href="https://maps.google.com/?q=-39.413806,-65.700389" target="_blank" rel="noopener noreferrer" class="contacto__item-value">Eusebio Arrieta 245, Lamarque, Río Negro</a>
           </div>
         </div>
 
@@ -351,6 +360,42 @@
       </a>
     </div>
   </footer>
+
+  <script>
+    // ── Carrusel galería ─────────────────────────────────
+    (function () {
+      const track  = document.getElementById('galeria-track');
+      const slides = track.querySelectorAll('.galeria-carousel__slide');
+      const dotsWrap = document.getElementById('galeria-dots');
+      let current = 0;
+
+      slides.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'galeria-dot' + (i === 0 ? ' is-active' : '');
+        d.setAttribute('aria-label', `Imagen ${i + 1}`);
+        d.addEventListener('click', () => goTo(i));
+        dotsWrap.appendChild(d);
+      });
+
+      function goTo(n) {
+        current = (n + slides.length) % slides.length;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dotsWrap.querySelectorAll('.galeria-dot').forEach((d, i) =>
+          d.classList.toggle('is-active', i === current));
+      }
+
+      document.getElementById('galeria-prev').addEventListener('click', () => goTo(current - 1));
+      document.getElementById('galeria-next').addEventListener('click', () => goTo(current + 1));
+
+      // Swipe táctil
+      let startX = 0;
+      track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+      track.addEventListener('touchend',   e => {
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) goTo(current + (diff > 0 ? 1 : -1));
+      });
+    })();
+  </script>
 
   <script>
     document.querySelectorAll('.faq__question').forEach(btn => {
